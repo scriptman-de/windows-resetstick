@@ -1,0 +1,1 @@
+New-SmbMapping -LocalPath N: -RemotePath \\Timago\WindowsReset$ -UserName "test\lra-djoin" -Password "Unsecurep@55w0rd!"

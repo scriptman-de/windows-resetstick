@@ -1,0 +1,9 @@
+WinPE_amd64_*
+*.iso
+*.wim
+*.zip
+unattend.xml
+*.clg
+
+*AppAssociations*.xml
+*StartLayout*.xml
