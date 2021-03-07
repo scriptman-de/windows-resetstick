@@ -23,6 +23,8 @@ Write-Host ""
 
 $env:IMAGEDRIVE = Get-ImageVolume
 
+Write-Host "Windows ResetStick ist Volume $env:IMAGEDRIVE"
+
 if($null -ne $env:IMAGEDRIVE) {
     Write-Host "Lösche alte Scripte"
     # Delete "old" scripts

@@ -1,9 +1,11 @@
 WinPE_amd64_*
 *.iso
 *.wim
+*.vhdx
 *.zip
 unattend.xml
 *.clg
 
 *AppAssociations*.xml
 *StartLayout*.xml
+ADKTools
