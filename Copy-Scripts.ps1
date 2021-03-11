@@ -23,7 +23,7 @@ Write-Host ""
 
 $env:IMAGEDRIVE = Get-ImageVolume
 
-Write-Host "Windows ResetStick ist Volume $env:IMAGEDRIVE"
+Write-Host -BackgroundColor Yellow -ForegroundColor Black "Windows ResetStick ist Volume $env:IMAGEDRIVE"
 
 if($null -ne $env:IMAGEDRIVE) {
     Write-Host "Lösche alte Scripte"
@@ -33,6 +33,7 @@ if($null -ne $env:IMAGEDRIVE) {
 
     Write-Host "Kopiere Powershell Scripte"
     # Powershell scripts
+    Copy-Item -Path .\RunScripts.ps1 $env:IMAGEDRIVE
     Copy-Item -Path .\Prepare-Environment.ps1 $env:IMAGEDRIVE
     Copy-Item -Path .\Prepare-Reset.ps1 $env:IMAGEDRIVE
     Copy-Item -Path .\Enable-Unattend.ps1 $env:IMAGEDRIVE
@@ -47,5 +48,8 @@ if($null -ne $env:IMAGEDRIVE) {
     Copy-Item -Path .\Mount-VirtualDisk-Parent.diskpart $env:IMAGEDRIVE
     Copy-Item -Path .\Mount-VirtualDisk-Child.diskpart $env:IMAGEDRIVE
 
+    # Write-Host "Kopiere boot.wim"
+    # Copy-Item -Path .\WinPE_amd64_ResetChild\media\sources\boot.wim $env:IMAGEDRIVE\sources
+    
     Write-Host -ForegroundColor Black -BackgroundColor Green "Fertig!"
 }

@@ -32,6 +32,8 @@ Dism /Add-Package /Image:"%MediaFolder%\mount" /PackagePath:"%WinPERoot%\amd64\W
 
 copy startnet.cmd "%MediaFolder%\mount\Windows\System32"
 
+Dism /Image:%MediaFolder%\mount /Add-Driver /Driver:SurfaceDriver\*.inf /recurse
+
 Dism /Unmount-Image /MountDir:%MediaFolder%\mount /Commit
 
 
