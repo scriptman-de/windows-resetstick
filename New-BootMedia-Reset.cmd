@@ -3,7 +3,7 @@ setlocal
 call "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\DandISetEnv.bat" 
 
 set DRIVE=%~dp0
-set FOLDER=WinPE_amd64_ResetChild
+set FOLDER=WinPE_amd64_ResetBootMedia
 set MediaFolder=%DRIVE%%FOLDER%
 cls
 echo Ausgabe erfolgt in: %MediaFolder%

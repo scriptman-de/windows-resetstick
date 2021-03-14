@@ -50,6 +50,7 @@ if($null -ne $env:IMAGEDRIVE) {
 
     # Write-Host "Kopiere boot.wim"
     # Copy-Item -Path .\WinPE_amd64_ResetChild\media\sources\boot.wim $env:IMAGEDRIVE\sources
+    # Copy-Item -Path .\Create-ResetBootEntry.cmd -Destination $env:IMAGEDRIVE
     
     Write-Host -ForegroundColor Black -BackgroundColor Green "Fertig!"
 }

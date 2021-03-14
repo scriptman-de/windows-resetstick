@@ -13,6 +13,7 @@ Copy-Item -Path .\Prepare-Reset.ps1 -Destination .\WinPE_amd64_ResetChild\mount\
 Copy-Item -Path .\Enable-Unattend.ps1 -Destination .\WinPE_amd64_ResetChild\mount\Scripts
 Copy-Item -Path .\Get-UnattendedFile.ps1 -Destination .\WinPE_amd64_ResetChild\mount\Scripts
 Copy-Item -Path .\Connect-NetworkShare.ps1 -Destination .\WinPE_amd64_ResetChild\mount\Scripts
+Copy-Item -Path .\Create-ResetBootEntry.cmd -Destination .\WinPE_amd64_ResetChild\mount\Scripts
 
 
 # Diskpart scripts
