@@ -39,7 +39,7 @@ Dism /Unmount-Image /MountDir:%MediaFolder%\mount /Commit
 Dism /Mount-Image /ImageFile:"%MediaFolder%\media\sources\boot.wim" /Index:1 /MountDir:"%MediaFolder%\mount"
 @ECHO ON
 xcopy /Y "%DRIVE%Stage1-Prepare\startnet-prepare.cmd" "%MediaFolder%\mount\Windows\System32\startnet.cmd"
-xcopy "%DRIVE%Stage1-Prepare\Run-Prepare.ps1" "%MediaFolder%\mount\Windows\System32\startnet.cmd"
+xcopy /Y "%DRIVE%Stage1-Prepare\Run-Prepare.ps1" "%MediaFolder%\mount\Windows\System32\"
 xcopy "%DRIVE%Stage1-Prepare\*.ps1" %MediaFolder%\mount\
 xcopy "%DRIVE%Stage1-Prepare\*.diskpart" %MediaFolder%\mount\
 Dism /Image:"%MediaFolder%\mount" /Add-Driver /Driver:"%DRIVE%Drivers" /recurse

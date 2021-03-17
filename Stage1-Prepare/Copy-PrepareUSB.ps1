@@ -2,7 +2,7 @@ function Get-ImageVolume {
     $drives = Get-PSDrive -PSProvider "FileSystem"
     
     foreach ($drive in $drives) {
-        if (Test-Path "$($drive.Root)IMAGEDRIVE.MRK") {
+        if (Test-Path "$($drive.Root)PREPAREDISK.MRK") {
             return $drive.Root.ToString()
         }
     }
@@ -16,7 +16,6 @@ Clear-Host
 Write-Host "============================================================"
 Write-Host "= Windows 10 Education Reset Stick                         ="
 Write-Host "= Scripts werden auf ResetStick kopiert                    ="
-# Write-Host "=                                                          ="
 Write-Host "============================================================"
 Write-Host ""
 
@@ -30,27 +29,28 @@ if($null -ne $env:IMAGEDRIVE) {
     # Delete "old" scripts
     Remove-Item -Path $env:IMAGEDRIVE\*.ps1 -Recurse
     Remove-Item -Path $env:IMAGEDRIVE\*.diskpart -Recurse
+    Remove-Item -Path $env:IMAGEDRIVE\unattendFiles -Recurse -ErrorAction SilentlyContinue
 
     Write-Host "Kopiere Powershell Scripte"
-    # Powershell scripts
-    Copy-Item -Path .\RunScripts.ps1 $env:IMAGEDRIVE
-    Copy-Item -Path .\Prepare-Environment.ps1 $env:IMAGEDRIVE
-    Copy-Item -Path .\Prepare-Reset.ps1 $env:IMAGEDRIVE
-    Copy-Item -Path .\Enable-Unattend.ps1 $env:IMAGEDRIVE
-    Copy-Item -Path .\Get-UnattendedFile.ps1 $env:IMAGEDRIVE
-    Copy-Item -Path .\Connect-NetworkShare.ps1 $env:IMAGEDRIVE
+    # scripts
+    Copy-Item -Path .\Stage1-Prepare\*.ps1 -Destination $env:IMAGEDRIVE
+    Copy-Item -Path .\Stage1-Prepare\*.diskpart -Destination $env:IMAGEDRIVE
 
-    Write-Host "Kopiere Diskpart Scripte"
+    #prerendered unattend
+    if (Test-Path .\Stage1-Prepare\unattendFiles) {
+        Write-Host "Kopiere vorhandede Unattend-Dateien"
+        New-Item -ItemType Directory -Path $env:IMAGEDRIVE\unattendFiles -ErrorAction SilentlyContinue
+        Copy-Item -Path .\Stage1-Prepare\unattendFiles\*.xml -Destination $env:IMAGEDRIVE\unattendFiles
+    }
+
+    Write-Host "Kopiere ResetOS.wim"
     # Diskpart scripts
-    Copy-Item -Path .\Hide-Partitions.diskpart $env:IMAGEDRIVE
-    Copy-Item -Path .\Create-VirtualDisk-Child.diskpart $env:IMAGEDRIVE
-    Copy-Item -Path .\Mount-Env-Partitions.diskpart $env:IMAGEDRIVE
-    Copy-Item -Path .\Mount-VirtualDisk-Parent.diskpart $env:IMAGEDRIVE
-    Copy-Item -Path .\Mount-VirtualDisk-Child.diskpart $env:IMAGEDRIVE
+    Copy-Item -Path .\ResetOS.wim -Destination $env:IMAGEDRIVE -Force
 
-    # Write-Host "Kopiere boot.wim"
-    # Copy-Item -Path .\WinPE_amd64_ResetChild\media\sources\boot.wim $env:IMAGEDRIVE\sources
-    # Copy-Item -Path .\Create-ResetBootEntry.cmd -Destination $env:IMAGEDRIVE
+    $marker = Test-Path "$($env:IMAGEDRIVE)IMAGEDRIVE.MRK"
+    if (-Not $marker) {
+        New-Item -Type File -Path $env:IMAGEDRIVE -Name "IMAGEDRIVE.MRK"
+    }
     
     Write-Host -ForegroundColor Black -BackgroundColor Green "Fertig!"
 }

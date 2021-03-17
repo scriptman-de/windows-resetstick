@@ -1,3 +1,8 @@
+if ($env:UNATTED_AVAIL -eq $true) {
+    Write-Host -ForegroundColor Yellow "REST-Anfrage wird nicht durchgeführt. Vorgerenderte Unattend-Dateien sind vorhanden."
+    Exit
+}
+
 # GET MAC ADDRESS
 $mac = (Get-CimInstance Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled -eq $true -and $_.DHCPEnabled -eq $true }).MACAddress
 
