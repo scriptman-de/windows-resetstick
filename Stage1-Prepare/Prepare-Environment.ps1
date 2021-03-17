@@ -1,32 +1,6 @@
-function Get-ImageVolume {
-    $drives = Get-PSDrive -PSProvider "FileSystem"
-    
-    foreach ($drive in $drives) {
-        if (Test-Path "$($drive.Root)IMAGEDRIVE.MRK") {
-            return $drive.Root.ToString()
-        }
-    }
-
-    # In case of PXE boot
-    return "X:\Scripts\"
-}
-
 function Test-ParentImage {
     return Test-Path "$($env:IMAGEDRIVE)win10-PARENT.vhdx" 
 }
-
-
-Clear-Host
-
-Write-Host "============================================================"
-Write-Host "= Windows 10 Education Reset Stick                         ="
-Write-Host "= Umgebung wird vorbereitet                                ="
-# Write-Host "=                                                          ="
-Write-Host "============================================================"
-Write-Host ""
-
-
-$env:IMAGEDRIVE = Get-ImageVolume
 
 ### Prepare Disk 0
 Write-Host "Festplatte wird geleert"
@@ -48,14 +22,17 @@ New-Partition -DiskNumber 0 -Size 128MB -GptType "{e3c9e316-0b5c-4db8-817d-f92df
 
 # Create RESETOS partition
 New-Partition -DiskNumber 0 -Size 4GB -DriveLetter R | Out-Null
-# if (Test-Path -Path "$($env:IMAGEDRIVE)resetos.wim") {
-#     # Format NTFS
-#     Format-Volume -DriveLetter R -FileSystem NTFS -NewFileSystemLabel "ResetOS"
-#     # Expand reset image
-#     Expand-WindowsImage -ImagePath "$($env:IMAGEDRIVE)resetos.wim" -Index 1 -ApplyPath R:\
-#     # Enable boot
-#     & cmd /c "R:\windows\system32\bcdboot.exe R:\Windows /s S:"
-# }
+if (Test-Path -Path "$($env:IMAGEDRIVE)resetos.wim") {
+    # Format NTFS
+    Write-Host -ForegroundColor Green "ResetOS Image gefunden. Bereite Partition vor."
+    Format-Volume -DriveLetter R -FileSystem NTFS -NewFileSystemLabel "ResetOS" | Out-Null
+    # Create Reset directory
+    New-Item -ItemType Directory -Path R:\ -Name "Reset" | Out-Null
+    # Copy reset image
+    Copy-Item -Path "$($env:IMAGEDRIVE)ResetOS.wim" -Destination R:\Reset\ | Out-Null
+}
+# Hide Reset Partition
+Set-Partition -DiskNumber 0 -PartitionNumber 3 -NoDefaultDriveLetter $true -IsHidden $true | Out-Null
 
 # Create Pagefile partition
 New-Partition -DiskNumber 0 -Size 4GB -DriveLetter P | Out-Null

@@ -15,7 +15,6 @@ Clear-Host
 Write-Host "============================================================"
 Write-Host "= Windows 10 Education Reset Stick                         ="
 Write-Host "= ResetDisk wird vorbereitet                               ="
-# Write-Host "=                                                          ="
 Write-Host "============================================================"
 Write-Host ""
 

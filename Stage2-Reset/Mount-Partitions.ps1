@@ -10,4 +10,4 @@ Set-Partition -DiskNumber 0 -PartitionNumber 4 -NewDriveLetter P
 # Images
 Set-Partition -DiskNumber 0 -PartitionNumber 5 -NewDriveLetter W 
 
-Get-Volume -DiskNumber 0
+Get-Partition -DiskNumber 0

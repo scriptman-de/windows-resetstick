@@ -1,10 +1,9 @@
 $ValidPath = Test-Path -Path .\WinPE_amd64_ResetChild\mount\Scripts
 
-if($ValidPath -eq $False) {
+if (-Not $ValidPath) {
     New-Item .\WinPE_amd64_ResetChild\mount\Scripts -ItemType Directory
 }
 
-Copy-Item -Path .\Prepare-Environment.ps1 -Destination .\WinPE_amd64_ResetChild\mount\Windows\System32
 Copy-Item -Path .\Prepare-Reset.ps1 -Destination .\WinPE_amd64_ResetChild\mount\Windows\System32
 
 # Powershell scripts

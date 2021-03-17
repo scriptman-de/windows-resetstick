@@ -6,4 +6,4 @@ wpeutil disablefirewall
 X:\Windows\system32\WindowsPowerShell\v1.0\powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted"
 
 ipconfig /all
-X:\Windows\system32\WindowsPowerShell\v1.0\powershell -Command "RunScriptsPrepare.ps1"
+X:\Windows\system32\WindowsPowerShell\v1.0\powershell -Command "Run-Prepare.ps1"

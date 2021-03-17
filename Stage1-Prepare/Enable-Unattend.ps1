@@ -20,5 +20,5 @@ $params = @{
 }
 
 # Enable setup
-$result = Invoke-RestMethod -Uri "http://windowsreset:3000/api/v1/enable" -Method POST -Body ($params | ConvertTo-Json) -ContentType "application/json"
+$result = Invoke-RestMethod -Uri "http://windowsreset/api/v1/enable" -Method POST -Body ($params | ConvertTo-Json) -ContentType "application/json"
 Write-Host -BackgroundColor Green -ForegroundColor Black $result.message

@@ -8,7 +8,7 @@ function Get-ImageVolume {
     }
 
     # In case of PXE boot
-    return "X:\Scripts\"
+    return "X:\"
 }
 
 Clear-Host
@@ -16,7 +16,6 @@ Clear-Host
 Write-Host "============================================================"
 Write-Host "= Windows 10 Education Reset Stick                         ="
 Write-Host "= Umgebung wird vorbereitet                                ="
-# Write-Host "=                                                          ="
 Write-Host "============================================================"
 Write-Host ""
 
