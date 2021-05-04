@@ -46,3 +46,13 @@ Scripts zum Erstellen einer Windows NativeBoot Umgebung zum automatischen Zurüc
             - Create-ResetBootEntry.cmd
             - Hide-Partitions.ps1
             - Hide-Partitions.diskpart
+
+3. Change Scripts
+    1. Boot Medium
+        - New-BootMedia-Change.cmd
+        - startnet-reset.cmd
+    2. Execution Scripts
+        - Run-Change.ps1
+            - Mount-EnvPartitions.diskpart
+            - Mount-VirtualDisk-Parent.diskpart
+            - Prepare-Change.ps1
