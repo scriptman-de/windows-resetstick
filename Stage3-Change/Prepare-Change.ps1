@@ -1,7 +1,7 @@
 ### Mount Partitions
 Write-Host "Partitionen mounten"
 # Remove all drive letters and assign correct letters
-& diskpart /s "$($env:IMAGEDRIVE)Mount-VirtualDisk-Parent.diskpart" | Out-Null
+& diskpart /s "$($env:IMAGEDRIVE)Mount-EnvPartitions.diskpart" | Out-Null
 
 # Create Child VHD
 Write-Host "Prüfe vorhandenen Child"
