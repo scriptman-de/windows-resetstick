@@ -15,7 +15,7 @@ Clear-Host
 
 Write-Host "============================================================"
 Write-Host "= Windows 10 Education Reset Stick                         ="
-Write-Host "= Änderungsumgebung wird vorbereitet                       ="
+Write-Host "= Aenderungsumgebung wird vorbereitet                       ="
 Write-Host "============================================================"
 Write-Host ""
 
