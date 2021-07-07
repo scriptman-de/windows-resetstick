@@ -9,10 +9,13 @@ $mac = (Get-CimInstance Win32_NetworkAdapterConfiguration | Where-Object { $_.IP
 # GET Serial Number
 $serial = (Get-CimInstance Win32_Bios).SerialNumber
 
+# GET UUID
+$uuid = (Get-CimInstance Win32_ComputerSystemProduct).UUID
 # GET ComputerModel
 $model = (Get-CimInstance Win32_ComputerSystem).Model
 # GET ComputerManufacturer
 $manufacturer = (Get-CimInstance Win32_ComputerSystem).Manufacturer
+
 
 # Prepare JSON
 $params = @{ 
@@ -21,6 +24,7 @@ $params = @{
     "serial"       = "$serial";
     "manufacturer" = "$manufacturer";
     "model"        = "$model";
+    "uuid"         = "$uuid";
     "comment"      = "Automatically added from Prepare-Environment";
 }
 
